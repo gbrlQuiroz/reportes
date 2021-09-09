@@ -15,6 +15,7 @@ import mb.company.reportes.service.MedicoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import net.sf.jasperreports.engine.*;
@@ -22,9 +23,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import lombok.extern.slf4j.Slf4j;
 
-
-
-
+import org.springframework.beans.factory.annotation.Value;
 
 @Service
 @Transactional(readOnly = true)
@@ -32,6 +31,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MedicoServiceImpl implements MedicoService {
 
     // private final Logger log = LoggerFactory.getLogger(MedicoServiceImpl.class);
+
+    @Value("${archivosPDF}")
+    String filesystemPDF;
 
     private MedicoRepository MedicoRepository;
 
@@ -57,7 +59,7 @@ public class MedicoServiceImpl implements MedicoService {
                 param.put("txtRfc", medicoObj.getRfc());
                 param.put("txtFechaNacimiento", medicoObj.getFechaNacimiento());
                 param.put("txtEmail", medicoObj.getEmail());
-                param.put("txtNumRegistro", (String)medicoObj.getNumRegistro().toString());
+                param.put("txtNumRegistro", (String) medicoObj.getNumRegistro().toString());
 
                 InputStream jrxmlArchivo = getClass().getResourceAsStream("/reportes/Medico.jrxml");
                 JasperReport jasperArchivo = JasperCompileManager.compileReport(jrxmlArchivo);
@@ -65,6 +67,11 @@ public class MedicoServiceImpl implements MedicoService {
 
                 byte[] codificado = Base64.encodeBase64(byteReporte);
                 String pdfFile = IOUtils.toString(codificado, "UTF-8");
+
+                String ruta = filesystemPDF + medicoObj.getRfc() + ".pdf";
+                FileOutputStream fos = new FileOutputStream(ruta);
+                fos.write(byteReporte);
+                fos.close();
 
                 return pdfFile;
 
@@ -76,13 +83,13 @@ public class MedicoServiceImpl implements MedicoService {
         } catch (JRException jreE) {
             String textoError;
             if (jreE.getMessage().contains("java.net.MalformedURLException")) {
-               textoError = "No existe el archivo jrxml";
+                textoError = "No existe el archivo jrxml";
             } else {
-               textoError = jreE.getMessage();
+                textoError = jreE.getMessage();
             }
             log.error("getMedico() - {}", textoError);
-            return "409 - " + textoError ;
-         } catch (Exception ex) {
+            return "409 - " + textoError;
+        } catch (Exception ex) {
             log.error("Error: {}", ex.getCause());
         }
         return null;
