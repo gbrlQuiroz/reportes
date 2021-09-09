@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="primer" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2dc66616-bec3-461e-8f6c-246b484b9c55">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<!-- <property name="background.image.path" value="/Users/propietario/proyectos/reportes/reportes/src/main/resources/reportes/imgBack.png"/> -->
+	<property name="background.image.path" value="reportes/imgBack.png"/>
+	<parameter name="txtNombre" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="txtApPaterno" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="txtApMaterno" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="txtRfc" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="txtFechaNacimiento" class="java.util.Date" isForPrompting="false"/>
+	<parameter name="txtEmail" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="txtNumRegistro" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="170" y="0" width="222" height="30" uuid="683fc9c0-3366-4e89-9fa6-00f42e54492f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[primer prueba de jasper en django]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="247" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="20" width="180" height="20" uuid="44cf56ca-53e2-4e44-b123-9d98ecc018ac"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="40" width="180" height="20" uuid="6dade3e1-2a5c-479d-b08c-3a9fbe75bf68"/>
+				<textFieldExpression><![CDATA[$P{txtApPaterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="60" width="180" height="20" uuid="20ae6519-d31b-4dfd-98f7-b4afe4f0e8b5"/>
+				<textFieldExpression><![CDATA[$P{txtApMaterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="90" width="180" height="20" uuid="3b0e0e1c-6b91-463c-acb7-4d58419fdb76"/>
+				<textElement>
+					<font fontName="Copperplate" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtRfc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="113" width="180" height="20" uuid="37a9bb06-fda7-40f7-bf08-570207caaf4e"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($P{txtFechaNacimiento})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="140" width="180" height="20" uuid="9e20b64a-8f8e-483d-b54f-6262fdce34ba"/>
+				<textFieldExpression><![CDATA[$P{txtEmail}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="170" width="180" height="20" uuid="6fd7de3b-6976-471c-b667-240f1538c228"/>
+				<textElement>
+					<font fontName="Al Nile" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtNumRegistro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
