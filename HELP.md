@@ -32,6 +32,7 @@ mvn clean ; mvn spring-boot:run
 mvn clean ; mvn compile
 mvn test -Dtest=ReportesTest
 mvn clean ; mvn test -Dtest=ReportesTest#getMedicosPDF
+mvn clean ; mvn test -Dtest=ReportesTest#getMedicosPDFV2
 
 
      

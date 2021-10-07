@@ -35,6 +35,9 @@ public class MedicoServiceImpl implements MedicoService {
     @Value("${archivosPDF}")
     String filesystemPDF;
 
+    @Value("${archivosQR}")
+    String filesystemQR;
+
     private MedicoRepository MedicoRepository;
 
     @Autowired
@@ -74,7 +77,6 @@ public class MedicoServiceImpl implements MedicoService {
                 fos.close();
 
                 return pdfFile;
-
             }
 
             log.error("El ID no existe y no regresa ningun valor");
@@ -89,6 +91,61 @@ public class MedicoServiceImpl implements MedicoService {
             }
             log.error("getMedico() - {}", textoError);
             return "409 - " + textoError;
+        } catch (Exception ex) {
+            log.error("Error: {}", ex.getCause());
+        }
+        return null;
+    }
+
+
+    @Override
+    public byte[] getMedicoV2(Long id) {
+        try {
+            Optional<Medico> medicoOpt = MedicoRepository.findById(id);
+
+            if (medicoOpt.isPresent()) {
+                Medico medicoObj = medicoOpt.get();
+                // log.info("--->>>medicoOpt: {}", medicoOpt);
+                log.info("--->>>medicoObj: {}", medicoObj);
+                // return medicoObj.toString();
+                Map<String, Object> param = new HashMap<>();
+                param.put("txtNombre", medicoObj.getNombre());
+                param.put("txtApPaterno", medicoObj.getApPaterno());
+                param.put("txtApMaterno", medicoObj.getApMaterno());
+                param.put("txtRfc", medicoObj.getRfc());
+                param.put("txtFechaNacimiento", medicoObj.getFechaNacimiento());
+                param.put("txtEmail", medicoObj.getEmail());
+                param.put("txtNumRegistro", (String) medicoObj.getNumRegistro().toString());
+
+                InputStream jrxmlArchivo = getClass().getResourceAsStream("/reportes/Medico.jrxml");
+                JasperReport jasperArchivo = JasperCompileManager.compileReport(jrxmlArchivo);
+                byte[] byteReporte = JasperRunManager.runReportToPdf(jasperArchivo, param, new JREmptyDataSource());
+
+                // byte[] codificado = Base64.encodeBase64(byteReporte);
+                // String pdfFile = IOUtils.toString(codificado, "UTF-8");
+
+                String ruta = filesystemPDF + medicoObj.getRfc() + ".pdf";
+                FileOutputStream fos = new FileOutputStream(ruta);
+                fos.write(byteReporte);
+                fos.close();
+
+                // return pdfFile;
+                return byteReporte;
+
+            }
+
+            log.error("El ID no existe y no regresa ningun valor");
+            return "404".getBytes();
+
+        } catch (JRException jreE) {
+            String textoError;
+            if (jreE.getMessage().contains("java.net.MalformedURLException")) {
+                textoError = "No existe el archivo jrxml";
+            } else {
+                textoError = jreE.getMessage();
+            }
+            log.error("getMedico() - {}", textoError);
+            return ("409 - " + textoError).getBytes();
         } catch (Exception ex) {
             log.error("Error: {}", ex.getCause());
         }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import mb.company.reportes.service.ActividadesAvaladasService;
@@ -60,5 +61,12 @@ public class ReportesRest {
         }
 
         return new ResponseEntity<String>(respuesta, null, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "medico/ver2/{id}/", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody byte[] getMedicoV2(@PathVariable("id") Long id, HttpServletResponse res) {
+        byte[] respuesta = medicoService.getMedicoV2(id);
+        return respuesta;
     }
 }

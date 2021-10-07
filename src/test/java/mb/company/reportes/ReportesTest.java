@@ -19,4 +19,16 @@ public class ReportesTest extends ReportesTestConfiguration{
  
     }
 
+    @Test
+    public void getMedicosPDFV2() throws Exception {
+       String idMedico = "36";
+       mockMvc.perform(MockMvcRequestBuilders.get("/reportes/medico/ver2/" + idMedico + "/")
+          .contentType(JSON))
+          .andExpect(MockMvcResultMatchers.status().isOk())
+          .andDo(MockMvcResultHandlers.print());
+       System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>OK(200)");
+ 
+ 
+    }
+
 }
