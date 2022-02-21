@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="primer" pageWidth="612" pageHeight="900" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2dc66616-bec3-461e-8f6c-246b484b9c55">
-	<property name="background.image.path" value="/Users/propietario/proyectos/reportes/reportes/src/main/resources/reportes/imgBack.png"/>
 	<parameter name="txtNombre" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="txtApPaterno" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="txtApMaterno" class="java.lang.String" isForPrompting="false"/>
@@ -9,6 +8,7 @@
 	<parameter name="txtFechaNacimiento" class="java.util.Date" isForPrompting="false"/>
 	<parameter name="txtEmail" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="txtNumRegistro" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="imgQR" class="java.lang.String" isForPrompting="false"/>
 	<background>
 		<band height="842" splitType="Stretch">
 			<image>
@@ -20,7 +20,7 @@
 	<title>
 		<band height="44" splitType="Stretch">
 			<staticText>
-				<reportElement x="170" y="0" width="222" height="30" uuid="683fc9c0-3366-4e89-9fa6-00f42e54492f"/>
+				<reportElement x="170" y="0" width="222" height="30" forecolor="#FF1A00" uuid="683fc9c0-3366-4e89-9fa6-00f42e54492f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[primer prueba de jasper en django]]></text>
 			</staticText>
@@ -33,53 +33,51 @@
 		<band height="35" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="247" splitType="Stretch">
+		<band height="736" splitType="Stretch">
 			<textField>
-				<reportElement x="180" y="0" width="180" height="20" uuid="44cf56ca-53e2-4e44-b123-9d98ecc018ac"/>
+				<reportElement x="180" y="0" width="180" height="20" forecolor="#FF1A00" uuid="44cf56ca-53e2-4e44-b123-9d98ecc018ac"/>
 				<textElement>
 					<font isBold="true" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{txtNombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="360" y="0" width="180" height="20" uuid="6dade3e1-2a5c-479d-b08c-3a9fbe75bf68"/>
+				<reportElement x="360" y="0" width="180" height="20" forecolor="#FF1A00" uuid="6dade3e1-2a5c-479d-b08c-3a9fbe75bf68"/>
 				<textFieldExpression><![CDATA[$P{txtApPaterno}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="260" y="60" width="180" height="20" uuid="20ae6519-d31b-4dfd-98f7-b4afe4f0e8b5"/>
+				<reportElement x="260" y="60" width="180" height="20" forecolor="#FF1A00" uuid="20ae6519-d31b-4dfd-98f7-b4afe4f0e8b5"/>
 				<textFieldExpression><![CDATA[$P{txtApMaterno}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="140" y="120" width="180" height="20" uuid="3b0e0e1c-6b91-463c-acb7-4d58419fdb76"/>
+				<reportElement x="140" y="120" width="180" height="20" forecolor="#FF1A00" uuid="3b0e0e1c-6b91-463c-acb7-4d58419fdb76"/>
 				<textElement>
 					<font fontName="Copperplate" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{txtRfc}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="176" width="180" height="20" uuid="37a9bb06-fda7-40f7-bf08-570207caaf4e"/>
+				<reportElement x="200" y="176" width="180" height="20" forecolor="#FF1A00" uuid="37a9bb06-fda7-40f7-bf08-570207caaf4e"/>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($P{txtFechaNacimiento})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="20" y="80" width="180" height="20" uuid="9e20b64a-8f8e-483d-b54f-6262fdce34ba"/>
+				<reportElement x="20" y="80" width="180" height="20" forecolor="#FF1A00" uuid="9e20b64a-8f8e-483d-b54f-6262fdce34ba"/>
 				<textFieldExpression><![CDATA[$P{txtEmail}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="20" y="176" width="180" height="20" uuid="6fd7de3b-6976-471c-b667-240f1538c228"/>
+				<reportElement x="20" y="176" width="180" height="20" forecolor="#FF1A00" uuid="6fd7de3b-6976-471c-b667-240f1538c228"/>
 				<textElement>
 					<font fontName="Al Nile" size="12" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{txtNumRegistro}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="40" y="470" width="75" height="80" uuid="f2d7cad5-26aa-46d6-97cc-b099fbe37a0b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64(($P{imgQR}).getBytes()))]]></imageExpression>
+			</image>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="31" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="28" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="20" splitType="Stretch"/>
-	</summary>
 </jasperReport>
